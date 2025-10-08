@@ -1,4 +1,4 @@
-<img width="969" height="584" alt="image" src="https://github.com/user-attachments/assets/ff854115-1deb-4a03-bd7a-8a73374a31e8" /># Block 2: Processing of sequence dataset
+# Block 2: Processing of sequence dataset
 
 ## Visualise file
 
@@ -179,7 +179,7 @@ Given the following example header
 ```regex
 >\1|\2|\3/
 ```
-Substitute whole header string with ">NC_026433.1|H1N1|USA|Homo_sapiens|2009-04-09".
+Substitute whole header string with ">NC_026433.1|H1N1|USA|Homo sapiens|2009-04-09".
 - \\1: "NC_026433.1".
 - \\2: "H1N1".
 - \\3: "USA|Homo_sapiens|2009-04-09".
@@ -189,16 +189,36 @@ sed 's/\s\+/_/g'
 ```
 Substitute all continuous white spaces with a single "_".
 
+Lets see our new heders.
+```bash
+grep ">" HA_genes_newHead.ffn | less;
+```
 
 <details>
 
 <summary>See output</summary>
 
+![](./images/HA_genes_newHead.png)
+
+</details>
+<br/>
+
+---
+### Wait! Let's do some checks
+
+While `|` separates the different fields from the header, what happens if data is missing from one field?
+
+Lets check for missing (i.e. empty) fields
+
 ```bash
-grep ">" HA_genes_newHead.ffn | less;
+grep '||' HA_genes_newHead.ffn;
 ```
 
-![](./images/HA_genes_newHead.png)
+<details>
+
+<summary>See output</summary>
+
+![](./images/HA_genes_newHead_missingField.png)
 
 </details>
 <br/>
