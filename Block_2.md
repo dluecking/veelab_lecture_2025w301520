@@ -8,6 +8,15 @@ Click <kbd>↑</kbd> and <kbd>↓</kbd> to navigate through the file visualisati
 
 Click <kbd>Q</kbd> to exit the viewing.
 
+<details>
+
+<summary>See output</summary>
+
+![](./images/sequences_IA_HA_NA_less.png)
+
+</details>
+
+
 
 ## Count sequences
 ```bash
