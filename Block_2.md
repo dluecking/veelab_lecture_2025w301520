@@ -146,50 +146,50 @@ sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3
 
 Given the following example header
 
-\>NC_026433.1 |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|H1N1|4|1701|USA|Homo sapiens|2009-04-09
+`>NC_026433.1 |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|H1N1|4|1701|USA|Homo sapiens|2009-04-09`
 
 ```regex
 >\(\S\+\)
 ```
-> "NC_026433.1". "\\\(text\\\)" saves to \\1, \\2, \\3, ...
+> `NC_026433.1`. `\(text\)` saves to `\1`, `\2`, `\3`, ...
 
 ```regex
  \S\+ .\+|
 ```
-> " |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|".
+> ` |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|`
 
 ```regex
 \(H[0-9]\+N[0-9]\+\)
 ```
-> ;"H1N1". Saved to \\2.
+> `H1N1`. Saved to `\2`
 
 ```regex
 |[^|]\+|[0-9]\+|'
 ```
-> "|4|1701|"
+> `|4|1701|`
 
 ```regex
 \(\S\+\)'
 ```
-> "USA|Homo sapiens|2009-04-09". Saved to \\3
+> `USA|Homo sapiens|2009-04-09`. Saved to `\3`
 
 ```regex
 >\1|\2|\3/
 ```
-> Substitute whole header string with ">NC_026433.1|H1N1|USA|Homo sapiens|2009-04-09".
-> - \\1: "NC_026433.1".
-> - \\2: "H1N1".
-> - \\3: "USA|Homo_sapiens|2009-04-09".
+> Substitute whole header string with `>NC_026433.1|H1N1|USA|Homo sapiens|2009-04-09`.
+> - `\1`: "NC_026433.1".
+> - `\2`: "H1N1".
+> - `\3`: "USA|Homo_sapiens|2009-04-09".
 
 ```bash
 sed 's/\s\+/_/g'
 ```
-> Substitute all continuous white spaces with a single "_".
+> Substitute all continuous white spaces with a single `_`.
 </br>
 
-Now, lets see our brand new headers.
+Now, lets see our brand new file.
 ```bash
-grep ">" HA_genes_newHead.ffn | less;
+less HA_genes_newHead.ffn;
 ```
 
 <details>
@@ -219,6 +219,19 @@ grep '||' HA_genes_newHead.ffn;
 ![](./images/HA_genes_newHead_missingField.png)
 
 </details>
+
+In order to fix this, we will add to the previous commands a replacement for missing fields.
+```bash
+sed 's/||/|nonRec|/g'   # Substitute missing field within the string
+sed 's/|$/|nonRec/'     # Substitute missing field at the end of the string
+```
+> This will substitute missing fields for a standardised string `nonRec`.
+
+Generate FASTA files with correct simplified headers
+```bash
+sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' HA_genes.ffn | sed 's/\s\+/_/g' | sed 's/||/|nonRec|/g' | sed 's/|$/|nonRec/' > HA_genes_newHead.ffn;
+sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' HA_genes.ffn | sed 's/\s\+/_/g' | sed 's/||/|nonRec|/g' | sed 's/|$/|nonRec/' > NA_genes_newHead.ffn;
+```
 <br/>
 
 ---
