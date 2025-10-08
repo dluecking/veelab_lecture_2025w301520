@@ -15,7 +15,7 @@ grep ">" sequences_IA_HA_NA.fasta;
 ```
 
 
-## Look at headers: too long and too much information
+## Look at headers: too long and too much information 🤮
 ```bash
 grep ">" sequences_IA_HA_NA.fasta | less;
 ```
