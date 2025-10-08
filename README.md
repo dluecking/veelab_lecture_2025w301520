@@ -24,10 +24,10 @@ Linux Commands Cheat Sheet: https://www.geeksforgeeks.org/linux-unix/linux-comma
 
 ## 4 Blocks of Exercises:
 
-[Block 1](Block_1.md)
+[Block 1: Project 1 introduction, Linux commands, downloading data](Block_1.md)
 
-[Block 2](Block_2.md)
+[Block 2: Processing data, translation, alignment, tree calculation](Block_2.md)
 
-[Block 3](Block_3.md)
+[Block 3: iTOL visualization, tree discussion](Block_3.md)
 
-[Block 4](Block_4.md)
+[Block 4: Project 2 introduction and exercises](Block_4.md)
