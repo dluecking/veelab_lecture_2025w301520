@@ -1,11 +1,16 @@
 # Veelab lecture 2025w301520
 Companion repository for the WS2025 Veelab Lecture 2025w301520 on Virus evolution and ecology. 
 
-
-## Overview and Project Description
+<details>
+<summary> ## Overview and Project Description</summary>
+  
+## Test Overview and Project Description
 In this part of the lecture, we focus on two bioinformatic exercises on two viruses:
 1. Project 1: Phylogenetics of Influenzaviruses
 2. Project 2: Recombination events in Hepatitis D virus
+  
+</details>
+
 
 
 ## Resources
