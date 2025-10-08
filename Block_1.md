@@ -22,6 +22,7 @@ For this course, we need some very fundamental commands. Namely:
 | `tail` | Displays the last few lines of a file |
 | `tree` | Displays directories and files in a tree-like structure. |
 | `cat` | Concatenates and displays file contents. |
+| `less` | Displays the content of a file (easy scrolling). |
 | `ssh` | Connects securely to a remote machine via the command line. |
 | `scp` | Securely copies files between local and remote machines over SSH. |
 
