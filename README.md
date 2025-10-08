@@ -28,23 +28,6 @@ Linux Commands Cheat Sheet: https://www.geeksforgeeks.org/linux-unix/linux-comma
 
 [Block 2](Block_2.md)
 
-  
+[Block 3](Block_3.md)
 
-## Block 3
-### iTol tree visualization
-
-
-### iTol tree discussion
-
-</details>
-
-<details>
-  <summary>
-    Block 4: Project 2: Recombinaiton events in Hepatitis D virus
-  </summary>
-
-## Block 4
-### Project 2: Recombination events in Hepatitis D virus
-tbd
-
-</details>
+[Block 4](Block_4.md)
