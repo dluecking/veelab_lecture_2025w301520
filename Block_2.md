@@ -1,4 +1,4 @@
-# Block 2: Processing of sequence dataset
+<img width="969" height="584" alt="image" src="https://github.com/user-attachments/assets/ff854115-1deb-4a03-bd7a-8a73374a31e8" /># Block 2: Processing of sequence dataset
 
 ## Visualise file
 
@@ -46,6 +46,7 @@ grep ">" sequences_IA_HA_NA.fasta | less;
 ```bash
 grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//' | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | sed 's/^\s\+2 //' > HA_NA_genes.lst;
 ```
+
 - Command breakdown
 
 ```bash
@@ -58,6 +59,16 @@ grep "^>" sequences_IA_HA_NA.fasta \ # grab only the header (lines starting with
 | sed 's/^\s\+2 //' \                # remove the count preceding the identifier
 > HA_NA_genes.lst;                   # output result to file containing the list
 ```
+
+<details>
+
+<summary>* internationally accepted naming convention for influenza viruses</summary>
+
+![](./images/influenza_naming_diagram_CDC.jpg)
+
+Source: Modified from http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2395936/pdf/bullwho00427-0070.pdf
+
+</details>
 
 <details>
 
@@ -103,18 +114,93 @@ grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//
 <br/>
 
 ---
-
-<details>
-
-<summary>* internationally accepted naming convention for influenza viruses</summary>
-
-![](./images/influenza_naming_diagram_CDC.jpg)
-
-Source: Modified from http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2395936/pdf/bullwho00427-0070.pdf
-
-</details>
-
-### Now, let's count how many unique identifiers occurring **only** twice we end up with.
+### Let's count how many unique identifiers (i.e. unique viruses) occurr **only** twice
 ```bash
 wc -l HA_NA_genes.lst;
 ```
+<br/>
+
+---
+### Now, let's filter out those unique viruses for which either HA or NA genes are missing 
+```bash
+perl filter_and_separate.pl HA_NA_genes.lst sequences_IA_HA_NA.fasta;
+```
+See [filter_and_separate.pl](./scripts/filter_and_separate.pl)
+
+We get two files created
+   - HA_genes.ffn
+   - NA_genes.ffn
+
+Important: From now one we are working on two file streams: the hemagglutinin ("HA") and the Neuraminidase ("NA").
+
+<br/>
+
+---
+### Now, let's filter out those unique viruses for which either HA or NA genes are missing 
+```bash
+sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' HA_genes.ffn | sed 's/\s\+/_/g' > HA_genes_newHead.ffn;
+sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' NA_genes.ffn | sed 's/\s\+/_/g' > NA_genes_newHead.ffn;
+```
+
+- Command breakdown
+
+Given the following example header
+
+\>NC_026433.1 |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|H1N1|4|1701|USA|Homo sapiens|2009-04-09
+
+```regex
+>\(\S\+\)
+```
+
+"NC_026433.1". "\\\(text\\\)" saves to \\1, \\2, \\3, ...
+
+
+```regex
+ \S\+ .\+|
+```
+
+" |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|".
+
+```regex
+\(H[0-9]\+N[0-9]\+\)
+```
+"H1N1". Saved to \\2.
+
+```regex
+|[^|]\+|[0-9]\+|'
+```
+"|4|1701|"
+
+```regex
+\(\S\+\)'
+```
+"USA|Homo sapiens|2009-04-09". Saved to \\3
+
+```regex
+>\1|\2|\3/
+```
+Substitute whole header string with ">NC_026433.1|H1N1|USA|Homo_sapiens|2009-04-09".
+- \\1: "NC_026433.1".
+- \\2: "H1N1".
+- \\3: "USA|Homo_sapiens|2009-04-09".
+
+```bash
+sed 's/\s\+/_/g'
+```
+Substitute all continuous white spaces with a single "_".
+
+
+<details>
+
+<summary>See output</summary>
+
+```bash
+grep ">" HA_genes_newHead.ffn | less;
+```
+
+![](./images/HA_genes_newHead.png)
+
+</details>
+<br/>
+
+---
