@@ -1,8 +1,7 @@
-## Block 1
-### Project 1: Phylogenetics of Influenzavirus
+# Block 1
+## Project 1: Phylogenetics of Influenzavirus
 
-
-### Introduction to the Linux commandline
+## Introduction to the Linux commandline
 The Linux command line is a text interface to your computer. Often referred to as the shell, terminal, console, prompt or various other names, it can give the appearance of being complex and confusing to use. But after getting used to the black screen and the keyboard-centric interface, you will quickly understand why its so powerful!
 
 For this course, we need some very fundamental commands. Namely:
@@ -38,7 +37,7 @@ The terminal is slightly different than other programs e.g. when it comes to cop
 | `↑ / ↓` | Scrolls through previous and next commands in history. |
 | `Ctrl + D` | Closes the terminal or logs out of the current shell. |
 
-### Implement the project structure
+## Implement the project structure
 In your homedirectory (`/lisc/home/user/<USER>` or `~/`), create the folder "2025w301520". 
 
 Then prepare the follwoing folder structure, so we can work in a nice environment:
@@ -50,4 +49,4 @@ $ tree 2025w301520
 ```
 
 
-### Download the correct Influenzavirus segments
+## Download the correct Influenzavirus segments
