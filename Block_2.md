@@ -299,23 +299,61 @@ perl predict_frame.pl tmp_HA_genes_newHead_trans3.tab > tmp_HA_genes_newHead_fra
 perl predict_frame.pl tmp_NA_genes_newHead_trans3.tab > tmp_NA_genes_newHead_frame.tab;
 ```
 
+<details>
+
+<summary>See output</summary>
+
+```bash
+less tmp_HA_genes_newHead_frame.tab;
+```
+
+![](./images/HA_genes_newHead_frame_tab.png)
+
+</details>
+
 Make new ffn files with correct frame by trimming
 ```bash
 perl trim_fasta_to_frame.pl tmp_HA_genes_newHead_frame.tab HA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > HA_genes_newHead_corrFrame.ffn;
 perl trim_fasta_to_frame.pl tmp_NA_genes_newHead_frame.tab NA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > NA_genes_newHead_corrFrame.ffn;
 ```
 
+- Command breakdown
+
+```bash
+awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}';
+```
+This is a complex one-liner script in awk. It is intended to transform a so-called "multi-line" FASTA into a "one-line" FASTA, where all the sequence is contiguous in one single line. This facilitates downtream operations on the sequence.
+
 Use seqkit to translate the files
 ```bash
 seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn > HA_genes_newHead_corrFrame.faa;
 seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn > NA_genes_newHead_corrFrame.faa;
 ```
-**Warning!** Some genes still have additional residues after the stop codon!
+
+<details>
+
+<summary>See output</summary>
+
+```bash
+less HA_genes_newHead_corrFrame.faa;
+```
+
+![](./images/HA_genes_newHead_corrFrame_trailingStop.png)
+
+**Warning!** Some genes still have additional residues after the stop codon! XXX changeimage
+
+</details>
 
 Use seqkit to translate the files and then trim the stop codons and subsequent aminoacids
 ```bash
 seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > HA_genes_newHead_corrFrame.faa;
 seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > NA_genes_newHead_corrFrame.faa;
+```
+
+- Command breakdown
+
+```bash
+sed 's/\*\S*//'; # Substitute an asterisk and all following characters by nothing (essentially deleting them)
 ```
 </br>
 
