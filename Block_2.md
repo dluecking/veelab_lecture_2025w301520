@@ -1,5 +1,6 @@
 # Block 2: Processing of sequence dataset
-## Visualise file
+
+## 1. Visualise file
 
 ```bash
 less sequences_IA_HA_NA.fasta;
@@ -15,10 +16,10 @@ Click <kbd>Q</kbd> to exit the viewing.
 ![](./images/sequences_IA_HA_NA_less.png)
 
 </details>
+<br/>
 
 
-
-## Count sequences
+## 2. Count sequences
 ```bash
 grep ">" sequences_IA_HA_NA.fasta;
 ```
@@ -53,7 +54,18 @@ grep "^>" sequences_IA_HA_NA.fasta \ # grab only the header (lines starting with
 
 \* [internationally accepted naming convention for influenza viruses](./images/influenza_naming_diagram_CDC.jpg). from http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2395936/pdf/bullwho00427-0070.pdf.
 
-Now, let's count how many unique identifiers occurring **only** twice we end up with.
+
+<details>
+
+<summary>\* internationally accepted naming convention for influenza viruses</summary>
+
+![](./images/influenza_naming_diagram_CDC.jpg)
+
+http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2395936/pdf/bullwho00427-0070.pdf
+
+</details>
+
+- Now, let's count how many unique identifiers occurring **only** twice we end up with.
 ```bash
 wc -l HA_NA_genes.lst;
 ```
