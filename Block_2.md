@@ -32,7 +32,13 @@ grep ">" sequences_IA_HA_NA.fasta | less;
 ```
 `| less` is used to pass the output of `grep ">" sequences_IA_HA_NA.fasta`. This allows us to scroll through the ouput in a similar fashion as before.
 
+<details>
+
+<summary>See output</summary>
+
 ![](./images/sequences_IA_HA_NA_less_headers.png)
+
+</details>
 <br/>
 
 ---
@@ -40,10 +46,7 @@ grep ">" sequences_IA_HA_NA.fasta | less;
 ```bash
 grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//' | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | sed 's/^\s\+2 //' > HA_NA_genes.lst;
 ```
-
-`grep "^>" sequences_IA_HA_NA.fasta`: grab only the header (lines starting with ">").
-
-`| grep -v "KC95119[68]"`: 
+- Command breakdown
 
 ```bash
 grep "^>" sequences_IA_HA_NA.fasta \ # grab only the header (lines starting with ">").
@@ -55,6 +58,51 @@ grep "^>" sequences_IA_HA_NA.fasta \ # grab only the header (lines starting with
 | sed 's/^\s\+2 //' \                # remove the count preceding the identifier
 > HA_NA_genes.lst;                   # output result to file containing the list
 ```
+
+<details>
+
+<summary>See output</summary>
+
+```bash
+grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | less;
+```
+
+![](./images/HA_NA_genes_01.png)
+
+```bash
+grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//' | less;
+```
+
+![](./images/HA_NA_genes_02.png)
+
+```bash
+grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | less;
+```
+
+![](./images/HA_NA_genes_03.png)
+
+```bash
+grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | less;
+```
+
+![](./images/HA_NA_genes_04.png)
+
+```bash
+grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | less;
+```
+
+![](./images/HA_NA_genes_05.png)
+
+```bash
+grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | sed 's/^\s\+2 //' | less;
+```
+
+![](./images/HA_NA_genes_06.png)
+
+</details>
+<br/>
+
+---
 
 <details>
 
