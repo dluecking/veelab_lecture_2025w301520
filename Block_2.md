@@ -136,7 +136,7 @@ Important: From now one we are working on two file streams: the hemagglutinin ("
 <br/>
 
 ---
-### Now, let's filter out those unique viruses for which either HA or NA genes are missing 
+## Simplify and standardise headers
 ```bash
 sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' HA_genes.ffn | sed 's/\s\+/_/g' > HA_genes_newHead.ffn;
 sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' NA_genes.ffn | sed 's/\s\+/_/g' > NA_genes_newHead.ffn;
@@ -235,3 +235,19 @@ sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3
 <br/>
 
 ---
+## Tranlsate nucleotide sequences to amino acids for alignment
+```bash
+seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | less;
+```
+
+<details>
+
+<summary>See output</summary>
+
+![](./images/HA_genes_newHead_wrongTrans.png)
+
+**WARNING!** Sequences are not all in the correct start frame.
+
+</details>
+
+###
