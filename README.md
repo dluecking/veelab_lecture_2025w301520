@@ -22,10 +22,13 @@ LiSC firewall: https://lisc.univie.ac.at/firewall. To activate network access.
 
 Linux Commands Cheat Sheet: https://www.geeksforgeeks.org/linux-unix/linux-commands-cheat-sheet/
 
+## 4 Blocks of Exercises:
+
 <details>
   <summary>
-    **Block 1**
+    Block 1: Introduction Project 1, Commands, Getting the data
   </summary>
+
 ## Block 1
 ### Project 1: Phylogenetics of Influenzavirus
 
@@ -79,11 +82,16 @@ $ tree 2025w301520
 
 
 ### Download the correct Influenzavirus segments
+
 </details>
 
 
 
-
+<details>
+  <summary>
+    Block 2: Gene processing, Alignment, Tree Calculation
+  </summary>
+  
 ## Block 2
 ### Process gene sequences
 
@@ -97,13 +105,31 @@ $ tree 2025w301520
 ### Tree calculation
 
 
+
+  
+</details>
+
+<details>
+  <summary>
+    Block 3: Visualization, Discussion
+  </summary>
+  
+
 ## Block 3
 ### iTol tree visualization
 
 
 ### iTol tree discussion
 
+</details>
+
+<details>
+  <summary>
+    Block 4: Project 2: Recombinaiton events in Hepatitis D virus
+  </summary>
 
 ## Block 4
 ### Project 2: Recombination events in Hepatitis D virus
 tbd
+
+</details>
