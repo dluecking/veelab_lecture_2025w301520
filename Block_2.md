@@ -151,45 +151,43 @@ Given the following example header
 ```regex
 >\(\S\+\)
 ```
-
-"NC_026433.1". "\\\(text\\\)" saves to \\1, \\2, \\3, ...
-
+> "NC_026433.1". "\\\(text\\\)" saves to \\1, \\2, \\3, ...
 
 ```regex
  \S\+ .\+|
 ```
-
-" |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|".
+> " |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|".
 
 ```regex
 \(H[0-9]\+N[0-9]\+\)
 ```
-"H1N1". Saved to \\2.
+> ;"H1N1". Saved to \\2.
 
 ```regex
 |[^|]\+|[0-9]\+|'
 ```
-"|4|1701|"
+> "|4|1701|"
 
 ```regex
 \(\S\+\)'
 ```
-"USA|Homo sapiens|2009-04-09". Saved to \\3
+> "USA|Homo sapiens|2009-04-09". Saved to \\3
 
 ```regex
 >\1|\2|\3/
 ```
-Substitute whole header string with ">NC_026433.1|H1N1|USA|Homo sapiens|2009-04-09".
-- \\1: "NC_026433.1".
-- \\2: "H1N1".
-- \\3: "USA|Homo_sapiens|2009-04-09".
+> Substitute whole header string with ">NC_026433.1|H1N1|USA|Homo sapiens|2009-04-09".
+> - \\1: "NC_026433.1".
+> - \\2: "H1N1".
+> - \\3: "USA|Homo_sapiens|2009-04-09".
 
 ```bash
 sed 's/\s\+/_/g'
 ```
-Substitute all continuous white spaces with a single "_".
+> Substitute all continuous white spaces with a single "_".
+</br>
 
-Lets see our new heders.
+Now, lets see our brand new headers.
 ```bash
 grep ">" HA_genes_newHead.ffn | less;
 ```
