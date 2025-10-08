@@ -240,6 +240,17 @@ sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3
 seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | less;
 ```
 
+- Command breakdown
+
+```bash
+seqkit translate \    # use the "translate" tool from seqkit
+--frame 1 \           # translate only frame 1
+--transl-table 1 \    # use translation table 1
+--seq-type dna \      # input sequence is DNA
+--threads 2 \         # use two threads for processing
+HA_genes_newHead.ffn; # specify input file
+```
+
 <details>
 
 <summary>See output</summary>
@@ -250,4 +261,68 @@ seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_
 
 </details>
 
-###
+### Identify correct starting frame and trim resulting files
+Make a tabular file with percentage of asterisks in the third colum.
+```bash
+seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | seqkit fx2tab -B '*' > tmp_HA_genes_newHead_trans3.tab;
+seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead.ffn | seqkit fx2tab -B '*' > tmp_NA_genes_newHead_trans3.tab;
+```
+
+- Command breakdown
+
+```bash
+seqkit translate \     # use the "translate" tool from seqkit
+--frame 1,2,3 \        # translate on all forward sense frames (1,2,3)
+--transl-table 1 \     # use translation table 1
+--seq-type dna \       # input sequence is DNA
+--threads 2 \          # use two threads for processing
+HA_genes_newHead.ffn \ # specify input file
+| seqkit fx2tab \      # pass result to "fx2tab" seqkit tool
+-B '*';                # get percentage of chosen character ("*") per tranlsated sequence
+```
+
+<details>
+
+<summary>See output</summary>
+
+```bash
+less tmp_HA_genes_newHead_trans3.tab;
+```
+
+![](./images/HA_genes_newHead_trans3_tab.png)
+
+</details>
+
+Get a tabular file with the corresponding predicted correct frame
+```bash
+perl predict_frame.pl tmp_HA_genes_newHead_trans3.tab > tmp_HA_genes_newHead_frame.tab;
+perl predict_frame.pl tmp_NA_genes_newHead_trans3.tab > tmp_NA_genes_newHead_frame.tab;
+```
+
+Make new ffn files with correct frame by trimming
+```bash
+perl trim_fasta_to_frame.pl tmp_HA_genes_newHead_frame.tab HA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > HA_genes_newHead_corrFrame.ffn;
+perl trim_fasta_to_frame.pl tmp_NA_genes_newHead_frame.tab NA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > NA_genes_newHead_corrFrame.ffn;
+```
+
+Use seqkit to translate the files
+```bash
+seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn > HA_genes_newHead_corrFrame.faa;
+seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn > NA_genes_newHead_corrFrame.faa;
+```
+**Warning!** Some genes still have additional residues after the stop codon!
+
+Use seqkit to translate the files and then trim the stop codons and subsequent aminoacids
+```bash
+seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > HA_genes_newHead_corrFrame.faa;
+seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > NA_genes_newHead_corrFrame.faa;
+```
+</br>
+
+### Make metadata files from the headers for use with iTOL
+```bash
+printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_HA.tab;
+printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_NA.tab;
+grep ">" HA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_HA.tab;
+grep ">" NA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_NA.tab;
+```
