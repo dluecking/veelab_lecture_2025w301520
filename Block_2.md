@@ -420,19 +420,24 @@ grep ">" NA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_
 - Command breakdown
 
 ```bash
-printf "accession\tsubtype\tcountry\thost\tdate\n";
+printf "accession\tsubtype\tcountry\thost\tdate\n"
 ```
 > This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
 
 ```bash
-printf "accession\tsubtype\tcountry\thost\tdate\n";
+sed 's/>//'
 ```
-> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
+> Substitute (`>`) by nothing (`//`) (essentially deleting them).
 
 ```bash
-printf "accession\tsubtype\tcountry\thost\tdate\n";
+sed 's/|/\t/g'
 ```
-> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
+> Substitute (`|`) by a tab (`\t`) globally. This will make the fields tab-separated.
+
+```bash
+>> genes_metadata_HA.tab;
+```
+> (`>>`) will write and append, comapred to (`>`) which would overwrite the files.
 
 <details>
 
