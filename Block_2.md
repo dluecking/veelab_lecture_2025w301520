@@ -257,7 +257,7 @@ sed 's/|$/|nonRec/'     # Substitute missing field at the end of the string
 Generate FASTA files with correct simplified headers
 ```bash
 sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' HA_genes.ffn | sed 's/\s\+/_/g' | sed 's/||/|nonRec|/g' | sed 's/|$/|nonRec/' > HA_genes_newHead.ffn;
-sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' HA_genes.ffn | sed 's/\s\+/_/g' | sed 's/||/|nonRec|/g' | sed 's/|$/|nonRec/' > NA_genes_newHead.ffn;
+sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3/' NA_genes.ffn | sed 's/\s\+/_/g' | sed 's/||/|nonRec|/g' | sed 's/|$/|nonRec/' > NA_genes_newHead.ffn;
 ```
 <br/>
 
