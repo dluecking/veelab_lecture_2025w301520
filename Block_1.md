@@ -114,3 +114,15 @@ tree .;
 ---
 ## Download the correct Influenzavirus segments
 Lets first go to the influenza resource of NCBI (XXXX here either insert screeshots or link to the slides presenting it XXXX).
+
+</br>
+
+---
+## Copy the file onto your XXX directory
+```bash
+scp sequences_IA_HA_NA.fasta XXXXXXXlisc:~/2025w301520/fluA/data;
+```
+
+Now, we are ready to start... preparing the files!
+
+</br>
