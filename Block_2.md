@@ -216,7 +216,7 @@ sed 's/\s\+/_/g'
 
 Now, lets see our brand new headers.
 ```bash
-less HA_genes_newHead.ffn;
+grep ">" HA_genes_newHead.ffn | less;
 ```
 
 <details>
@@ -291,8 +291,8 @@ HA_genes_newHead.ffn; # specify input file
 ### Identify correct starting frame and trim resulting files
 Make a tabular file with percentage of asterisks in the third colum.
 ```bash
-seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | seqkit fx2tab -B '*' > tmp_HA_genes_newHead_trans3.tab;
-seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead.ffn | seqkit fx2tab -B '*' > tmp_NA_genes_newHead_trans3.tab;
+seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | seqkit fx2tab -B '*' > HA_genes_newHead_trans3.tab;
+seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead.ffn | seqkit fx2tab -B '*' > NA_genes_newHead_trans3.tab;
 ```
 
 - Command breakdown
@@ -313,7 +313,7 @@ HA_genes_newHead.ffn \ # specify input file
 <summary>See output</summary>
 
 ```bash
-less tmp_HA_genes_newHead_trans3.tab;
+less HA_genes_newHead_trans3.tab;
 ```
 
 ![](./images/HA_genes_newHead_trans3_tab.png)
@@ -322,16 +322,18 @@ less tmp_HA_genes_newHead_trans3.tab;
 
 Get a tabular file with the corresponding predicted correct frame
 ```bash
-perl predict_frame.pl tmp_HA_genes_newHead_trans3.tab > tmp_HA_genes_newHead_frame.tab;
-perl predict_frame.pl tmp_NA_genes_newHead_trans3.tab > tmp_NA_genes_newHead_frame.tab;
+perl ../scripts/predict_frame.pl HA_genes_newHead_trans3.tab > HA_genes_newHead_frame.tab;
+perl ../scripts/predict_frame.pl NA_genes_newHead_trans3.tab > NA_genes_newHead_frame.tab;
 ```
+See <a href="./scripts/predict_frame.pl" target="_blank">predict_frame.pl</a>
+
 
 <details>
 
 <summary>See output</summary>
 
 ```bash
-less tmp_HA_genes_newHead_frame.tab;
+less HA_genes_newHead_frame.tab;
 ```
 
 ![](./images/HA_genes_newHead_frame_tab.png)
@@ -340,9 +342,10 @@ less tmp_HA_genes_newHead_frame.tab;
 
 Make new ffn files with correct frame by trimming
 ```bash
-perl trim_fasta_to_frame.pl tmp_HA_genes_newHead_frame.tab HA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > HA_genes_newHead_corrFrame.ffn;
-perl trim_fasta_to_frame.pl tmp_NA_genes_newHead_frame.tab NA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > NA_genes_newHead_corrFrame.ffn;
+perl ../scripts/trim_fasta_to_frame.pl tmp_HA_genes_newHead_frame.tab HA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > HA_genes_newHead_corrFrame.ffn;
+perl ../scripts/trim_fasta_to_frame.pl tmp_NA_genes_newHead_frame.tab NA_genes_newHead.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' > NA_genes_newHead_corrFrame.ffn;
 ```
+See <a href="./scripts/trim_fasta_to_frame.pl" target="_blank">trim_fasta_to_frame.pl</a>
 
 - Command breakdown
 
@@ -367,7 +370,7 @@ less HA_genes_newHead_corrFrame.faa;
 
 ![](./images/HA_genes_newHead_corrFrame_trailingStop.png)
 
-**Warning!** Some genes still have additional residues after the stop codon! XXX changeimage
+**Warning!** Some genes still have additional residues after the stop codon!
 
 </details>
 
@@ -380,10 +383,26 @@ seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_
 - Command breakdown
 
 ```bash
-sed 's/\*\S*//'; # Substitute an asterisk and all following characters by nothing (essentially deleting them)
+sed 's/\*\S*//';
 ```
+> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
+
+<details>
+
+<summary>See output</summary>
+
+```bash
+less HA_genes_newHead_corrFrame.faa;
+```
+
+![](./images/HA_genes_newHead_corrFrame_final_less.png)
+
+👍🏻 Good job! we have now our final files for alingment! 🥳
+
+</details>
 </br>
 
+---
 ### Make metadata files from the headers for use with iTOL
 ```bash
 printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_HA.tab;
@@ -391,3 +410,18 @@ printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_NA.tab;
 grep ">" HA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_HA.tab;
 grep ">" NA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_NA.tab;
 ```
+
+<details>
+
+<summary>See output</summary>
+
+```bash
+less genes_metadata_HA.tab;
+```
+
+![](./images/genes_metadata_HA_tab.png)
+
+👍🏻 Good job! we have now our final files for alingment! 🥳
+
+</details>
+</br>
