@@ -1,6 +1,7 @@
 # Block 2
 
 ## Alignment
+
 The plan is to align the translated amino acid sequences of the HA and NA proteins, then align them, then back-translate them to nucleotide sequences and then finally align these nucleotide sequences.
 
 Why the back-and-forth translating step?
@@ -23,6 +24,7 @@ For these steps, we move to `tree/`:
 `$ cd ../tree`
 
 **Step 1: AA Alignment**
+
 We will align the sequences with `muscle` (https://www.drive5.com/muscle/ or wikipedia). Its a solid and widely used aligner, which can handle our ~800 sequences. 
 
 ```bash
