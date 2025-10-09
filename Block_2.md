@@ -5,14 +5,14 @@
 ```bash
 pwd;
 ```
-Output should show `/lisc/home/user/<lisc_username>/2025w301520_fluA`. This is the directory we created at the end of our previous excercise block.
+Output should show `/lisc/home/user/<lisc_username>/2025w301520/fluA`. This is the directory we created at the end of our previous excercise block.
 
 ## Change to temporary directory
 
 ```bash
 cd tmp;
 ```
-Since most files we will generate are temporary, it makes more sense to work inside this directory and only write final processed files in  `/lisc/home/user/<lisc_username>/2025w301520_fluA/processed_HA_NA`.
+Since most files we will generate are temporary, it makes more sense to work inside this directory and only write final processed files in  `/lisc/home/user/<lisc_username>/2025w301520/fluA/processed_HA_NA`.
 
 ## Inspect data file
 
@@ -263,6 +263,14 @@ sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3
 
 ---
 ## Tranlsate nucleotide sequences to amino acids for alignment
+
+Wait! lets first load **[seqkit](https://bioinf.shenwei.me/seqkit/)**!
+```bash
+module load conda;
+conda activate seqkit-2.10.1;
+```
+
+Now, to the translation.
 ```bash
 seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | less;
 ```
@@ -427,17 +435,17 @@ printf "accession\tsubtype\tcountry\thost\tdate\n"
 ```bash
 sed 's/>//'
 ```
-> Substitute (`>`) by nothing (`//`) (essentially deleting them).
+> Substitute `>` by nothing (`//`) (essentially deleting them).
 
 ```bash
 sed 's/|/\t/g'
 ```
-> Substitute (`|`) by a tab (`\t`) globally. This will make the fields tab-separated.
+> Substitute `|` by a tab (`\t`) globally. This will make the fields tab-separated.
 
 ```bash
 >> genes_metadata_HA.tab;
 ```
-> (`>>`) will write and append, comapred to (`>`) which would overwrite the files.
+> `>>` will write and append, comapred to `>` which would overwrite the files.
 
 <details>
 
