@@ -145,7 +145,20 @@ We get two files created
    - HA_genes.ffn
    - NA_genes.ffn
 
-Important: From now one we are working on two file streams: the hemagglutinin ("HA") and the Neuraminidase ("NA").
+<details>
+
+<summary>See output</summary>
+
+```bash
+less HA_genes.ffn;
+```
+
+![](./images/HA_genes_less.png)
+
+</details>
+<br/>
+
+**Important:** From now one we are working on two file streams: the hemagglutinin ("HA") and the Neuraminidase ("NA").
 
 <br/>
 
@@ -170,12 +183,12 @@ Given the following example header
 ```regex
  \S\+ .\+|
 ```
-> Matches: ` |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|`
+> Matches: ` |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|`.
 
 ```regex
 \(H[0-9]\+N[0-9]\+\)
 ```
-> Matches: `H1N1`. Saves string to `\2`
+> Matches: `H1N1`. Saves string to `\2`.
 
 ```regex
 |[^|]\+|[0-9]\+|'
@@ -185,7 +198,7 @@ Given the following example header
 ```regex
 \(\S\+\)'
 ```
-> Matches: `USA|Homo sapiens|2009-04-09`. Saves string to `\3`
+> Matches: `USA|Homo sapiens|2009-04-09`. Saves string to `\3`.
 
 ```regex
 >\1|\2|\3/
@@ -201,7 +214,7 @@ sed 's/\s\+/_/g'
 > Substitute all continuous white spaces (` `) with a single `_` character.
 </br>
 
-Now, lets see our brand new file.
+Now, lets see our brand new headers.
 ```bash
 less HA_genes_newHead.ffn;
 ```
