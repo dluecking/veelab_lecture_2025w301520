@@ -7,7 +7,14 @@ pwd;
 ```
 Output should show `/lisc/home/user/<lisc_username>/2025w301520_fluA`. This is the directory we created at the end of our previous excercise block.
 
-## Visualise file
+## Change to temporary directory
+
+```bash
+cd tmp;
+```
+Since most files we will generate are temporary, it makes more sense to work inside this directory and only write final processed files in  `/lisc/home/user/<lisc_username>/2025w301520_fluA/processed_HA_NA`.
+
+## Inspect data file
 
 ```bash
 less ../data/sequences_IA_HA_NA.fasta;
@@ -25,17 +32,17 @@ less ../data/sequences_IA_HA_NA.fasta;
 </details>
 <br/>
 
----
-## Count sequences
+
+### Count sequences
 ```bash
-grep -c ">" sequences_IA_HA_NA.fasta;
+grep -c ">" ../data/sequences_IA_HA_NA.fasta;
 ```
 <br/>
 
----
-## Look at headers: too long and too much information 🤮
+
+### Look at headers: too long and too much information 🤮
 ```bash
-grep ">" sequences_IA_HA_NA.fasta | less;
+grep ">" ../data/sequences_IA_HA_NA.fasta | less;
 ```
 - Remember: `| less` is used to pass the output of `grep ">" ../data/sequences_IA_HA_NA.fasta`. This allows us to scroll using <kbd>↑</kbd> and <kbd>↓</kbd> through the ouput in a similar fashion as before.
 
@@ -51,20 +58,20 @@ grep ">" sequences_IA_HA_NA.fasta | less;
 ---
 ## Get sequences only for those where both the Hemagglutinin (HA) and Neuraminidase (NA) gene sequences are available
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//' | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | sed 's/^\s\+2 //' > HA_NA_genes.lst;
+grep "^>" ../data/sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//' | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | sed 's/^\s\+2 //' > HA_NA_genes.lst;
 ```
 
 - Command breakdown
 
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta \ # grab only the header (lines starting with ">").
-| grep -v "KC95119[68]" \            # remove accessions KC951196 and KC951198
-| sed 's/.\+virus (//' \             # remove all text preceding the virus name*.
-| sed 's/)) [a-z]\+ .\+/)/' \        # remove all text following the virus name*.
-| uniq -c \                          # get a unique list of the identifiers and count the number of occurrences
-| grep -P "^\s+2" \                  # select only those lines where exactly two sequences are found per unique identifier
-| sed 's/^\s\+2 //' \                # remove the count preceding the identifier
-> HA_NA_genes.lst;                   # output result to file containing the list
+grep "^>" ../data/sequences_IA_HA_NA.fasta \ # grab only the header (lines starting with ">").
+| grep -v "KC95119[68]" \                    # remove accessions KC951196 and KC951198
+| sed 's/.\+virus (//' \                    # remove all text preceding the virus name*.
+| sed 's/)) [a-z]\+ .\+/)/' \               # remove all text following the virus name*.
+| uniq -c \                                 # get a unique list of the identifiers and count the number of occurrences
+| grep -P "^\s+2" \                         # select only those lines where exactly two sequences are found per unique identifier
+| sed 's/^\s\+2 //' \                       # remove the count preceding the identifier
+> HA_NA_genes.lst;                          # output result to file containing the list
 ```
 
 <details>
@@ -82,37 +89,37 @@ Source: Modified from http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2395936/pdf/bu
 <summary>See output</summary>
 
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | less;
+grep "^>" ../data/sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | less;
 ```
 
 ![](./images/HA_NA_genes_01.png)
 
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//' | less;
+grep "^>" ../data/sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//' | less;
 ```
 
 ![](./images/HA_NA_genes_02.png)
 
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | less;
+grep "^>" ../data/sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | less;
 ```
 
 ![](./images/HA_NA_genes_03.png)
 
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | less;
+grep "^>" ../data/sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | less;
 ```
 
 ![](./images/HA_NA_genes_04.png)
 
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | less;
+grep "^>" ../data/sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | less;
 ```
 
 ![](./images/HA_NA_genes_05.png)
 
 ```bash
-grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | sed 's/^\s\+2 //' | less;
+grep "^>" ../data/sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//'  | sed 's/)) [a-z]\+ .\+/)/' | uniq -c | grep -P "^\s+2" | sed 's/^\s\+2 //' | less;
 ```
 
 ![](./images/HA_NA_genes_06.png)
@@ -130,7 +137,7 @@ wc -l HA_NA_genes.lst;
 
 ### Now, let's filter out those unique viruses for which either HA or NA genes are missing 
 ```bash
-perl filter_and_separate.pl HA_NA_genes.lst sequences_IA_HA_NA.fasta;
+perl ../scripts/filter_and_separate.pl HA_NA_genes.lst ../data/sequences_IA_HA_NA.fasta;
 ```
 See <a href="./scripts/filter_and_separate.pl" target="_blank">filter_and_separate.pl</a>
 
@@ -158,27 +165,27 @@ Given the following example header
 ```regex
 >\(\S\+\)
 ```
-> `NC_026433.1`. `\(text\)` saves to `\1`, `\2`, `\3`, ...
+> Matches: `NC_026433.1`. The syntax `\(text\)` saves to `\1`, `\2`, `\3`, ...
 
 ```regex
  \S\+ .\+|
 ```
-> ` |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|`
+> Matches: ` |Influenza A virus (A/California/07/2009(H1N1)) segment 4 hemagglutinin (HA) gene, complete cds|Alphainfluenzavirus influenzae|`
 
 ```regex
 \(H[0-9]\+N[0-9]\+\)
 ```
-> `H1N1`. Saved to `\2`
+> Matches: `H1N1`. Saves string to `\2`
 
 ```regex
 |[^|]\+|[0-9]\+|'
 ```
-> `|4|1701|`
+> Matches: `|4|1701|`
 
 ```regex
 \(\S\+\)'
 ```
-> `USA|Homo sapiens|2009-04-09`. Saved to `\3`
+> Matches: `USA|Homo sapiens|2009-04-09`. Saves string to `\3`
 
 ```regex
 >\1|\2|\3/
@@ -191,7 +198,7 @@ Given the following example header
 ```bash
 sed 's/\s\+/_/g'
 ```
-> Substitute all continuous white spaces with a single `_`.
+> Substitute all continuous white spaces (` `) with a single `_` character.
 </br>
 
 Now, lets see our brand new file.
