@@ -1,13 +1,20 @@
 # Block 2: Processing of sequence dataset
 
+## Make sure we are inside our working directory
+
+```bash
+pwd;
+```
+Output should show `/lisc/home/user/<lisc_username>/2025w301520_fluA`. This is the directory we created at the end of our previous excercise block.
+
 ## Visualise file
 
 ```bash
-less sequences_IA_HA_NA.fasta;
+less ../data/sequences_IA_HA_NA.fasta;
 ```
-Click <kbd>↑</kbd> and <kbd>↓</kbd> to navigate through the file visualisation.
+- Click <kbd>↑</kbd> and <kbd>↓</kbd> to navigate through the file visualisation.
 
-Click <kbd>Q</kbd> to exit the viewing.
+- Click <kbd>Q</kbd> to exit the viewing.
 
 <details>
 
@@ -30,7 +37,7 @@ grep -c ">" sequences_IA_HA_NA.fasta;
 ```bash
 grep ">" sequences_IA_HA_NA.fasta | less;
 ```
-`| less` is used to pass the output of `grep ">" sequences_IA_HA_NA.fasta`. This allows us to scroll through the ouput in a similar fashion as before.
+- Remember: `| less` is used to pass the output of `grep ">" ../data/sequences_IA_HA_NA.fasta`. This allows us to scroll using <kbd>↑</kbd> and <kbd>↓</kbd> through the ouput in a similar fashion as before.
 
 <details>
 
@@ -113,19 +120,19 @@ grep "^>" sequences_IA_HA_NA.fasta | grep -v "KC95119[68]" | sed 's/.\+virus (//
 </details>
 <br/>
 
----
+
 ### Let's count how many unique identifiers (i.e. unique viruses) occurr **only** twice
 ```bash
 wc -l HA_NA_genes.lst;
 ```
 <br/>
 
----
+
 ### Now, let's filter out those unique viruses for which either HA or NA genes are missing 
 ```bash
 perl filter_and_separate.pl HA_NA_genes.lst sequences_IA_HA_NA.fasta;
 ```
-See [filter_and_separate.pl](./scripts/filter_and_separate.pl)
+See <a href="./scripts/filter_and_separate.pl" target="_blank">filter_and_separate.pl</a>
 
 We get two files created
    - HA_genes.ffn
