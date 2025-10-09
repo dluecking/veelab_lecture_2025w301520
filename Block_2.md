@@ -421,8 +421,11 @@ cd ../processed_HA_NA;
 
 Print column headers and add tab-separated (`\t`) fields from the headers.
 ```bash
+# Create ouput files by writing headers
 printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_HA.tab;
 printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_NA.tab;
+
+# Append to the files the different fields of the standardised headers
 grep ">" HA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_HA.tab;
 grep ">" NA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_NA.tab;
 ```
@@ -432,7 +435,7 @@ grep ">" NA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_
 ```bash
 printf "accession\tsubtype\tcountry\thost\tdate\n"
 ```
-> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
+> Print headers separated by a tab chatacter (`\t`).
 
 ```bash
 sed 's/>//'
