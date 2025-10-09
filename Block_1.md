@@ -37,17 +37,79 @@ The terminal is slightly different than other programs e.g. when it comes to cop
 | `Tab` | Auto-completes file or directory names (<- this one is your friend!) |
 | `↑ / ↓` | Scrolls through previous and next commands in history. |
 | `Ctrl + D` | Closes the terminal or logs out of the current shell. |
+</br>
 
+---
 ## Implement the project structure
-In your homedirectory (`/lisc/home/user/<USER>` or `~/`), create the folder "2025w301520". 
+In your home directory (`/lisc/home/user/<USER>` or `~/`), create the folder "2025w301520" and go into it.
 
-Then prepare the follwoing folder structure, so we can work in a nice environment:
+<details>
+
+<summary>See commands</summary>
+
+```bash
+mkdir 2025w301520;
+cd  2025w301520;
 ```
-$ tree 2025w301520
-├── data
-├── processed_HA_NA
-└── scripts
+
+</details>
+
+
+Once in that directory, we will create the directory structure, so we can work in a nice environment 😉.
+```bash
+2025w301520
+└── fluA
+    ├── data            # store original downlaoded 'raw' data
+    ├── processed_HA_NA # store processed input sequence and metadata files
+    ├── scripts         # store all scripts
+    ├── tmp             # store all intermediate files (those which do not get used by downstream software)
+    └── tree            # store tree-related files
 ```
 
+<details>
 
+<summary>See commands</summary>
+
+```bash
+# Make ~/2025w301520/fluA directory and change to it
+mkdir fluA;
+cd fluA;
+
+# Make directories inside of ~/2025w301520/fluA
+mkdir data;
+mkdir processed_HA_NA;
+mkdir scripts;
+mkdir tmp;
+mkdir tree;
+
+# Visualise your directory structure
+tree .;
+```
+
+</details>
+</br>
+
+---
+## Populate your script directory
+Copy all scripts (`*`) from `/lisc/data/scratch/course/2025w301520/fluA/scripts` to your own script directory (`~/2025w301520/fluA/scripts`)
+
+```bash
+cp /lisc/data/scratch/course/2025w301520/fluA/scripts/* ~/2025w301520/fluA/scripts;
+```
+
+Lets check it all looks fine.
+```bash
+tree .;
+```
+
+<details>
+
+<summary>You should see the following</summary>
+
+![](./images/fluA_dirStruct_scripts.png)
+
+</details>
+</br>
+
+---
 ## Download the correct Influenzavirus segments
