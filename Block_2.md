@@ -386,16 +386,16 @@ less HA_genes_newHead_corrFrame.faa;
 
 ### Use seqkit to translate the files and then trim the stop codons and subsequent aminoacids
 ```bash
-seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/HA_genes_newHead_corrFrame.faa;
-seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/NA_genes_newHead_corrFrame.faa;
+seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S\{0,30\}$//' > ../processed_HA_NA/HA_genes_newHead_corrFrame.faa;
+seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S\{0,30\}$//' > ../processed_HA_NA/NA_genes_newHead_corrFrame.faa;
 ```
 
 - Command breakdown
 
 ```bash
-sed 's/\*\S*//';
+sed 's/\*\S\{0,30\}$//';
 ```
-> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
+> This will substitute an asterisk (`*`) followed by none to 30 non-white-space characters (`\S\{0,30\}`) by nothing (`//`) (essentially deleting them).
 
 <details>
 
