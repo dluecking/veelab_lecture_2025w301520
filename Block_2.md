@@ -376,8 +376,8 @@ less HA_genes_newHead_corrFrame.faa;
 
 Use seqkit to translate the files and then trim the stop codons and subsequent aminoacids
 ```bash
-seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > HA_genes_newHead_corrFrame.faa;
-seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > NA_genes_newHead_corrFrame.faa;
+seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/HA_genes_newHead_corrFrame.faa;
+seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/NA_genes_newHead_corrFrame.faa;
 ```
 
 - Command breakdown
@@ -392,7 +392,7 @@ sed 's/\*\S*//';
 <summary>See output</summary>
 
 ```bash
-less HA_genes_newHead_corrFrame.faa;
+less ../processed_HA_NA/HA_genes_newHead_corrFrame.faa;
 ```
 
 ![](./images/HA_genes_newHead_corrFrame_final_less.png)
@@ -404,12 +404,35 @@ less HA_genes_newHead_corrFrame.faa;
 
 ---
 ### Make metadata files from the headers for use with iTOL
+Change to our `processed_HA_NA` directory.
+```bash
+cd ../processed_HA_NA;
+```
+
+Print column headers and add tab-separated (`\t`) fields from the headers.
 ```bash
 printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_HA.tab;
 printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_NA.tab;
 grep ">" HA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_HA.tab;
 grep ">" NA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_NA.tab;
 ```
+
+- Command breakdown
+
+```bash
+printf "accession\tsubtype\tcountry\thost\tdate\n";
+```
+> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
+
+```bash
+printf "accession\tsubtype\tcountry\thost\tdate\n";
+```
+> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
+
+```bash
+printf "accession\tsubtype\tcountry\thost\tdate\n";
+```
+> This will substitute an asterisk (`*`) and all following non-white characters (`\S*`) by nothing (`//`) (essentially deleting them).
 
 <details>
 
