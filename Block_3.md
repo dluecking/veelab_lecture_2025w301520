@@ -32,3 +32,24 @@ muscle -super5 ../processed_HA_NA/HA_genes_newHead_corrFrame.faa -output HA_gene
 muscle -super5 ../processed_HA_NA/NA_genes_newHead_corrFrame.faa -output NA_genes_aligned.aln;
 
 ```
+
+
+
+**Step 2: Back-translation**
+
+We use pal2nal.pl (https://www.bork.embl.de/pal2nal/) to backtranslate:
+
+```
+pal2nal.pl
+```
+
+
+
+**Step 3: NT Alignment**
+
+Finally, we are ready to align again, again using muscle but this time on the backtranslated sequences:
+
+```
+muscle
+```
+
