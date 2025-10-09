@@ -300,21 +300,22 @@ HA_genes_newHead.ffn;   # specify input file
 ### Identify correct starting frame and trim resulting files
 Make a tabular file with percentage of asterisks in the third colum.
 ```bash
-seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | seqkit fx2tab -B '*' > HA_genes_newHead_trans3.tab;
-seqkit  translate --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead.ffn | seqkit fx2tab -B '*' > NA_genes_newHead_trans3.tab;
+seqkit translate --allow-unknown-codon --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | seqkit fx2tab -B '*' > HA_genes_newHead_trans3.tab;
+seqkit translate --allow-unknown-codon --frame 1,2,3 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead.ffn | seqkit fx2tab -B '*' > NA_genes_newHead_trans3.tab;
 ```
 
 - Command breakdown
 
 ```bash
-seqkit translate \     # use the "translate" tool from seqkit
---frame 1,2,3 \        # translate on all forward sense frames (1,2,3)
---transl-table 1 \     # use translation table 1
---seq-type dna \       # input sequence is DNA
---threads 2 \          # use two threads for processing
-HA_genes_newHead.ffn \ # specify input file
-| seqkit fx2tab \      # pass result to "fx2tab" seqkit tool
--B '*';                # get percentage of chosen character ("*") per tranlsated sequence
+seqkit translate \      # use the "translate" tool from seqkit
+--allow-unknown-codon \ # use X for unknown codons instead of *
+--frame 1,2,3 \         # translate on all forward sense frames (1,2,3)
+--transl-table 1 \      # use translation table 1
+--seq-type dna \        # input sequence is DNA
+--threads 2 \           # use two threads for processing
+HA_genes_newHead.ffn \  # specify input file
+| seqkit fx2tab \       # pass result to "fx2tab" seqkit tool
+-B '*';                 # get percentage of chosen character ("*") per tranlsated sequence
 ```
 
 <details>
