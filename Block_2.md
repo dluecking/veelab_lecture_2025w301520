@@ -364,7 +364,7 @@ awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0
 ```
 This is a complex one-liner script in awk. It is intended to transform a so-called "multi-line" FASTA into a "one-line" FASTA, where all the sequence is contiguous in one single line. This facilitates downtream operations on the sequence.
 
-###Use seqkit to translate the files
+### Use seqkit to translate the files
 ```bash
 seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn > HA_genes_newHead_corrFrame.faa;
 seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn > NA_genes_newHead_corrFrame.faa;
