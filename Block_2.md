@@ -272,18 +272,19 @@ conda activate seqkit-2.10.1;
 
 Now, to the translation.
 ```bash
-seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | less;
+seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead.ffn | less;
 ```
 
 - Command breakdown
 
 ```bash
-seqkit translate \    # use the "translate" tool from seqkit
---frame 1 \           # translate only frame 1
---transl-table 1 \    # use translation table 1
---seq-type dna \      # input sequence is DNA
---threads 2 \         # use two threads for processing
-HA_genes_newHead.ffn; # specify input file
+seqkit translate \      # use the "translate" tool from seqkit
+--allow-unknown-codon \ # use X for unknown codons instead of *
+--frame 1 \             # translate only frame 1
+--transl-table 1 \      # use translation table 1
+--seq-type dna \        # input sequence is DNA
+--threads 2 \           # use two threads for processing
+HA_genes_newHead.ffn;   # specify input file
 ```
 
 <details>
@@ -364,8 +365,8 @@ This is a complex one-liner script in awk. It is intended to transform a so-call
 
 ###Use seqkit to translate the files
 ```bash
-seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn > HA_genes_newHead_corrFrame.faa;
-seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn > NA_genes_newHead_corrFrame.faa;
+seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn > HA_genes_newHead_corrFrame.faa;
+seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn > NA_genes_newHead_corrFrame.faa;
 ```
 
 <details>
@@ -384,8 +385,8 @@ less HA_genes_newHead_corrFrame.faa;
 
 ### Use seqkit to translate the files and then trim the stop codons and subsequent aminoacids
 ```bash
-seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/HA_genes_newHead_corrFrame.faa;
-seqkit translate --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/NA_genes_newHead_corrFrame.faa;
+seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 HA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/HA_genes_newHead_corrFrame.faa;
+seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 NA_genes_newHead_corrFrame.ffn | awk '/^>/ {if (NR > 1) printf("\n"); printf("%s\n", $0); next;} {printf("%s", $0);} END {printf("\n");}' | sed 's/\*\S*//' > ../processed_HA_NA/NA_genes_newHead_corrFrame.faa;
 ```
 
 - Command breakdown
