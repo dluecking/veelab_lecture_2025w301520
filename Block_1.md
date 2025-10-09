@@ -113,3 +113,4 @@ tree .;
 
 ---
 ## Download the correct Influenzavirus segments
+Lets first go to the influenza resource of NCBI (XXXX here either insert screeshots or link to the slides presenting it XXXX).
