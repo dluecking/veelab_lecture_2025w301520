@@ -291,6 +291,8 @@ HA_genes_newHead.ffn;   # specify input file
 
 <summary>See output</summary>
 
+To view this example click the <Kbd>End</Kbd> key.
+
 ![](./images/HA_genes_newHead_wrongTrans.png)
 
 **WARNING!** Sequences are not all in the correct start frame.
@@ -379,6 +381,8 @@ seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna
 less HA_genes_newHead_corrFrame.faa;
 ```
 
+To view this example click the <Kbd>End</Kbd> key.
+
 ![](./images/HA_genes_newHead_corrFrame_trailingStop.png)
 
 **Warning!** Some genes still have additional residues after the stop codon!
@@ -410,6 +414,8 @@ sed 's/\*/X/g'
 ```bash
 less ../processed_HA_NA/HA_genes_newHead_corrFrame.faa;
 ```
+
+To view this example click the <Kbd>End</Kbd> key.
 
 ![](./images/HA_genes_newHead_corrFrame_final_less.png)
 
