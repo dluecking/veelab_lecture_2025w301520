@@ -45,9 +45,25 @@ pal2nal.pl
 
 
 
-**Step 3: NT Alignment**
+**Step 3: Trim alignment**
 
-Finally, we are ready to align again, again using muscle but this time on the backtranslated sequences:
+Lets first view our alignment using [Aliview](https://github.com/AliView/AliView), a lightweight alingment viewer/editor.
+
+Here are the links to download it for three different operating systems.
+
+- Windows - http://www.ormbunkar.se/aliview/downloads/linux
+
+![](./images/Aliview_download_linux.png)
+
+- OsX - http://www.ormbunkar.se/aliview/downloads/mac
+
+![](./images/Aliview_download_mac.png)
+
+- Linux - http://www.ormbunkar.se/aliview/downloads/windows
+
+![](./images/Aliview_download_windows.png)
+
+
 
 ```
 muscle
