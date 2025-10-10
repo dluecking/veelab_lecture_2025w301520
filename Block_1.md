@@ -113,7 +113,9 @@ tree .;
 
 ---
 ## Download the correct Influenzavirus segments
-Lets first go to the influenza resource of NCBI (XXXX here either insert screeshots or link to the slides presenting it XXXX).
+Let's first go to the influenza resource of NCBI ([https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/](https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/)).
+
+XXXX @BUSRA here either insert screeshots or link to the slides presenting it. If slides, when ready, put in the pdf slides in a folder 'slides'. I guess we will have a infleunza A intro, one of Hepatitis, and one of the downloading, right? XXXX
 
 </br>
 
