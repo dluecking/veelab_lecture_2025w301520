@@ -25,27 +25,27 @@ For these steps, we move to `tree/`:
 
 **Step 1: AA Alignment**
 
-We will align the sequences with `muscle` (https://www.drive5.com/muscle/ or wikipedia). Its a solid and widely used aligner, which can handle our ~800 sequences. 
+We will align the sequences with `mafft` (https://mafft.cbrc.jp/alignment/server/index.html). Its a solid and widely used aligner, which can handle our ~800 sequences. Still, this step will take a couple of minutes!
 
 ```bash
-muscle -super5 ../processed_HA_NA/HA_genes_newHead_corrFrame.faa -output HA_genes_aligned.aln;
-muscle -super5 ../processed_HA_NA/NA_genes_newHead_corrFrame.faa -output NA_genes_aligned.aln;
-
+mafft --thread 4 --amino --localpair --maxiterate 1000 ../processed_HA_NA/HA_genes_newHead_corrFrame.faa > HA_genes_newHead_corrFrame_aln.faa;
+mafft --thread 4 --amino --localpair --maxiterate 1000 ../processed_HA_NA/NA_genes_newHead_corrFrame.faa > NA_genes_newHead_corrFrame_aln.faa;
 ```
-
 
 
 **Step 2: Back-translation**
 
-We use pal2nal.pl (https://www.bork.embl.de/pal2nal/) to backtranslate:
+We use pal2nal.pl (https://www.bork.embl.de/pal2nal/) to backtranslate. 
 
 ```
-pal2nal.pl
+perl ../scripts/pal2nal.pl HA_genes_newHead_corrFrame_aln.faa ../tmp/HA_genes_newHead_corrFrame.ffn -output fasta -codontable 1 > HA_genes_newHead_corrFrame_aln.ffn
+
+erl ../scripts/pal2nal.pl NA_genes_newHead_corrFrame_aln.faa ../tmp/NA_genes_newHead_corrFrame.ffn -output fasta -codontable 1 > NA_genes_newHead_corrFrame_aln.ffn
+
 ```
 
 
-
-**Step 3: Trim alignment**
+**Step 3: View alignment**
 
 Lets first view our alignment using [Aliview](https://github.com/AliView/AliView), a lightweight alingment viewer/editor.
 
@@ -64,8 +64,16 @@ Here are the links to download it for three different operating systems.
 ![](./images/Aliview_download_windows.png)
 
 
+**Step 4: Trim alignment**
+
+As you've seen, we got some overhangs in our alignment, which creates unnecessary noise in our alignment and therefore tree. Note that this step needs careful consideration, in some cases keeping overhangs is fine and actually the _correct_ way. 
+
+For now, lets trim. We are going to use `trimal` for that. 
 
 ```
-muscle
+trimal -in NA_genes_newHead_corrFrame_aln.ffn -out NA_genes_newHead_corrFrame_aln_trimmed.ffn -automated1
+trimal -in HA_genes_newHead_corrFrame_aln.ffn -out HA_genes_newHead_corrFrame_aln_trimmed.ffn -automated1
 ```
+
+
 
