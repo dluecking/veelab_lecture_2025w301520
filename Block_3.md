@@ -2,7 +2,7 @@
 
 ## Alignment
 
-The plan is to align the translated amino acid sequences of the HA and NA proteins, then align them, then back-translate them to nucleotide sequences and then finally align these nucleotide sequences.
+The plan is to align the translated amino acid sequences of the HA and NA proteins, then back-translate them to nucleotide sequences and use this nucleotide alignment to trim and finally calculate the tree. 
 
 Why the back-and-forth translating step?
 <details>
@@ -32,7 +32,6 @@ mafft --thread 4 --amino --localpair --maxiterate 1000 ../processed_HA_NA/HA_gen
 mafft --thread 4 --amino --localpair --maxiterate 1000 ../processed_HA_NA/NA_genes_newHead_corrFrame.faa > NA_genes_newHead_corrFrame_aln.faa;
 ```
 
-
 **Step 2: Back-translation**
 
 We use pal2nal.pl (https://www.bork.embl.de/pal2nal/) to backtranslate. 
@@ -40,12 +39,11 @@ We use pal2nal.pl (https://www.bork.embl.de/pal2nal/) to backtranslate.
 ```
 perl ../scripts/pal2nal.pl HA_genes_newHead_corrFrame_aln.faa ../tmp/HA_genes_newHead_corrFrame.ffn -output fasta -codontable 1 > HA_genes_newHead_corrFrame_aln.ffn
 
-erl ../scripts/pal2nal.pl NA_genes_newHead_corrFrame_aln.faa ../tmp/NA_genes_newHead_corrFrame.ffn -output fasta -codontable 1 > NA_genes_newHead_corrFrame_aln.ffn
+perl ../scripts/pal2nal.pl NA_genes_newHead_corrFrame_aln.faa ../tmp/NA_genes_newHead_corrFrame.ffn -output fasta -codontable 1 > NA_genes_newHead_corrFrame_aln.ffn
 
 ```
 
-
-**Step 3: View alignment**
+**Step 3: View alignment and trim**
 
 Lets first view our alignment using [Aliview](https://github.com/AliView/AliView), a lightweight alingment viewer/editor.
 
@@ -64,6 +62,7 @@ Here are the links to download it for three different operating systems.
 ![](./images/Aliview_download_windows.png)
 
 
+
 **Step 4: Trim alignment**
 
 As you've seen, we got some overhangs in our alignment, which creates unnecessary noise in our alignment and therefore tree. Note that this step needs careful consideration, in some cases keeping overhangs is fine and actually the _correct_ way. 
@@ -71,9 +70,53 @@ As you've seen, we got some overhangs in our alignment, which creates unnecessar
 For now, lets trim. We are going to use `trimal` for that. 
 
 ```
+module load trimal
+
 trimal -in NA_genes_newHead_corrFrame_aln.ffn -out NA_genes_newHead_corrFrame_aln_trimmed.ffn -automated1
 trimal -in HA_genes_newHead_corrFrame_aln.ffn -out HA_genes_newHead_corrFrame_aln_trimmed.ffn -automated1
 ```
+
+Have a look at the alignment again! Did that work? Are we happy with the alignment how it is?
+
+
+
+**Step 5: Tree calculation**
+
+Again, tree calculation involves a lot of computational power and solves a complex bioinformatic problem. We are using `iqtree2`. Learn about what happens behind the scenes here:
+
+https://iqtree.github.io/doc/Tutorial
+
+This are the commands we will be running, which take like ~40 min each. So grab a coffee :). 
+
+```
+iqtree2 -s NA_genes_newHead_corrFrame_aln_trimmed.ffn \
+  -m GTR+6 \
+  -B 1000 -alrt 1000 \
+  -T 4 \
+  -pre NA_tree;
+
+# and
+iqtree2 -s HA_genes_newHead_corrFrame_aln_trimmed.ffn \
+  -m GTR+6 \
+  -B 1000 -alrt 1000 \
+  -T 4 \
+  -pre HA_tree
+
+```
+
+Here's the breakdown of the command:
+
+| Parameter | Description |
+|-----------|-------------|
+| `-m GTR+6` | Sets the substitution model to **GTR** (General Time Reversible) for nucleotides, with **6 rate categories** for among-site rate variation (FreeRate model). |
+| `-B 1000` | Performs **1,000 ultrafast bootstrap replicates** to assess branch support quickly and accurately. |
+| `-alrt 1000` | Performs **1,000 SH-aLRT tests** for complementary branch support statistics. |
+| `-T 4` | Uses **4 threads** for parallel computation. |
+| `-pre NA_tree` | Sets the output file prefix. |
+
+
+
+
 
 
 
