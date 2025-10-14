@@ -22,7 +22,7 @@ LiSC firewall: https://lisc.univie.ac.at/firewall. To activate network access.
 
 Linux Commands Cheat Sheet: https://www.geeksforgeeks.org/linux-unix/linux-commands-cheat-sheet/
 
-## 4 Blocks of Exercises:
+## 4 Blocks of Exercises
 
 [Block 1: Project 1 introduction, Linux commands, downloading data](Block_1.md)
 
