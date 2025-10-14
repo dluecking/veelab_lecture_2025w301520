@@ -124,10 +124,10 @@ For this, we will use a web tool:
 [iTOL](https://itol.embl.de/) 
 
 Login (top right) with the user "veelab_students", pw is shared in the class. 
-[login](images/login.png)
+![login](./images/login.png)
 
 Then go create your own workspace.
-[workspace](images/workspace.png)
+![workspace](./images/workspace.png)
 
 Then try to do these steps, but also feel free to just play around:
 - **upload** your tree files (literally `NA_<something>.treefile`), which are saved in newick format.
