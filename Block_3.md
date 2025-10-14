@@ -80,7 +80,8 @@ Have a look at the alignment again! Did that work? Are we happy with the alignme
 
 
 
-**Step 5: Tree calculation**
+
+## Phylogenetic tree calculation
 
 Again, tree calculation involves a lot of computational power and solves a complex bioinformatic problem. We are using `iqtree2`. Learn about what happens behind the scenes here:
 
@@ -113,6 +114,30 @@ Here's the breakdown of the command:
 | `-alrt 1000` | Performs **1,000 SH-aLRT tests** for complementary branch support statistics. |
 | `-T 4` | Uses **4 threads** for parallel computation. |
 | `-pre NA_tree` | Sets the output file prefix. |
+
+
+
+## Tree Visualization
+
+For this, we will use a web tool:
+
+[iTOL](https://itol.embl.de/) 
+
+Login (top right) with the user "veelab_students", pw is shared in the class. 
+[login](images/login.png)
+
+Then go create your own workspace.
+[workspace](images/workspace.png)
+
+Then try to do these steps, but also feel free to just play around:
+- **upload** your tree files (literally `NA_<something>.treefile`), which are saved in newick format.
+- have a look at different tree **layouts**
+- have a look at midpoint **rooting**
+- try to add datasets to your tree (we've prepared them for you in the `itol_datasets folder
+- what do you find regarding subtypes, country, host, subtypes etc?
+- do you notice anything interesting (e.g. clusters of countries, hosts etc, or exemtion from these clusters?)
+- try to link such **spillovers** to news/articles/historical knowledge you might find
+- ...
 
 
 
