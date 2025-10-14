@@ -1,4 +1,4 @@
-# Block 3
+# Block 3: Alignment and tree calculation
 
 ## Alignment
 
