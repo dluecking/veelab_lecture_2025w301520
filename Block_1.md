@@ -1,4 +1,4 @@
-# Block 1
+# Block 1: Introduction and first steps
 ## Project 1: Phylogenetics of Influenzavirus
 
 ## Introduction to the Linux commandline
