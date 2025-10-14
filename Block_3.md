@@ -119,15 +119,17 @@ Here's the breakdown of the command:
 
 ## Tree Visualization
 
-For this, we will use a web tool:
+For this, we will use a web tool: [**iTOL**](https://itol.embl.de/) 
 
-[iTOL](https://itol.embl.de/) 
+Login (top right) with the user **"veelab_students"**, password is shared in the class.  
+<p align="left">
+  <img src="./images/login.png" width="200">
+</p>
 
-Login (top right) with the user "veelab_students", pw is shared in the class. 
-![login](./images/login.png)
-
-Then go create your own workspace.
-![workspace](./images/workspace.png)
+Then go create your own workspace.  
+<p align="left">
+  <img src="./images/new_workspace.png" width="200">
+</p>
 
 Then try to do these steps, but also feel free to just play around:
 - **upload** your tree files (literally `NA_<something>.treefile`), which are saved in newick format.
