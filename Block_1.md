@@ -128,3 +128,7 @@ scp sequences_IA_HA_NA.fasta XXXXXXXlisc:~/2025w301520/fluA/data;
 Now, we are ready to start... preparing the files!
 
 </br>
+
+<p align="right">
+    <kbd> <br> <a href="./Block_2.md"><b><large>Next: Block 2</large></b></a> <br> </kbd>
+</p>
