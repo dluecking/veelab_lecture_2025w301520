@@ -476,3 +476,8 @@ less genes_metadata_HA.tab;
 
 </details>
 </br>
+
+<p align="right">
+    <kbd> <br> <a href="./Block_3.md"><b><large>Next: Block 3</large></b></a> <br> </kbd>
+</p>
+
