@@ -122,9 +122,13 @@ These are the filtering criteria we will use to download the correct sequences:
 - exclude lab strains
 - Segment (2): HA & NA
 
-<summary>After choosing these filters, you should see the following:</summary>
-![](./images/Screenshot_NCBIVirus_filtering.png)
+<details> 
+<summary>After choosing these filters, it should look like this:</summary>
 
+![](./images/Screenshot_NCBIVirus_filtering.png)
+    
+</details>
+    
 When it looks correct, click on "Download All Results". In order for each sequence to include relevant metadata (which we will use to annotate our tree at the end), we need to export specific fields:
 - Step 1: Choose Sequence Data (FASTA format): Nucleotide
 - Step 3: Check "Build custom" for your FASTA definition header line and choose in this given order (by clicking on "Add"):
@@ -138,9 +142,12 @@ When it looks correct, click on "Download All Results". In order for each sequen
     - Host
     - Collection Date
  
-
-</summary>After you see each field in the right list, as shown below, click on download.</summary>
+<details>
+<summary>After you see each field in the right list, as shown below, click on download.</summary>
+    
 ![](./images/Screenshot_NCBIVirus_downloading.png)
+
+</details>
 
 </br>
 
