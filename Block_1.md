@@ -115,7 +115,32 @@ tree .;
 ## Download the correct Influenzavirus segments
 Let's first go to the influenza resource of NCBI ([https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/](https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/)).
 
-XXXX @BUSRA here either insert screeshots or link to the slides presenting it. If slides, when ready, put in the pdf slides in a folder 'slides'. I guess we will have a infleunza A intro, one of Hepatitis, and one of the downloading, right? XXXX
+These are the filtering criteria we will use to download the correct sequences:
+- Genus: Alphainfluenzavirus A
+- Nucleotide completeness: complete
+- Host (3): avian, swine, human
+- exclude lab strains
+- Segment (2): HA & NA
+
+<summary>After choosing these filters, you should see the following:</summary>
+![](./images/Screenshot_NCBIVirus_filtering.png)
+
+When it looks correct, click on "Download All Results". In order for each sequence to include relevant metadata (which we will use to annotate our tree at the end), we need to export specific fields:
+- Step 1: Choose Sequence Data (FASTA format): Nucleotide
+- Step 3: Check "Build custom" for your FASTA definition header line and choose in this given order (by clicking on "Add"):
+    - Accession
+    - GenBank Title
+    - Genus
+    - Genotype
+    - Segment
+    - Length
+    - Country
+    - Host
+    - Collection Date
+ 
+
+</summary>After you see each field in the right list, as shown below, click on download.</summary>
+![](./images/Screenshot_NCBIVirus_downloading.png)
 
 </br>
 
