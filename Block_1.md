@@ -41,15 +41,16 @@ The terminal is slightly different than other programs e.g. when it comes to cop
 
 ---
 ## Implement the project structure
-In your home directory (`/lisc/home/user/<USER>` or `~/`), create the folder "2025w301520" and go into it.
+In our course directory (`/lisc/scratch/course/2025w301520/`), create the folder `<USER>` (replace `<USER>` with your username) and go into it.
 
 <details>
 
 <summary>See commands</summary>
 
 ```bash
-mkdir 2025w301520;
-cd  2025w301520;
+cd /lisc/scratch/course/2025w301520/;
+mkdir <USER>;
+cd  <USER>;
 ```
 
 </details>
@@ -57,7 +58,7 @@ cd  2025w301520;
 
 Once in that directory, we will create the directory structure, so we can work in a nice environment 😉.
 ```bash
-2025w301520
+<USER>
 └── fluA
     ├── data            # store original downlaoded 'raw' data
     ├── processed_HA_NA # store processed input sequence and metadata files
@@ -71,7 +72,7 @@ Once in that directory, we will create the directory structure, so we can work i
 <summary>See commands</summary>
 
 ```bash
-# Make ~/2025w301520/fluA directory and change to it
+# Make <USER>/fluA directory and change to it
 mkdir fluA;
 cd fluA;
 
@@ -91,10 +92,10 @@ tree .;
 
 ---
 ## Populate your script directory
-Copy all scripts (`*`) from `/lisc/data/scratch/course/2025w301520/fluA/scripts` to your own script directory (`~/2025w301520/fluA/scripts`)
+Copy all scripts (`*`) from `/lisc/data/scratch/course/2025w301520/fluA/scripts` to your own script directory (`<USER>/fluA/scripts`)
 
 ```bash
-cp /lisc/data/scratch/course/2025w301520/fluA/scripts/* ~/2025w301520/fluA/scripts;
+cp /lisc/data/scratch/course/2025w301520/fluA/scripts/* scripts/;
 ```
 
 Lets check it all looks fine.
@@ -152,9 +153,9 @@ When it looks correct, click on "Download All Results". In order for each sequen
 </br>
 
 ---
-## Copy the file onto your XXX directory
+## Copy the file onto your `<USER>/fluA/data` directory
 ```bash
-scp sequences_IA_HA_NA.fasta XXXXXXXlisc:~/2025w301520/fluA/data;
+scp sequences_IA_HA_NA.fasta <USER>@login01.lisc.univie.ac.at:/lisc/scratch/course/2025w301520/<USER>/fluA/data;
 ```
 
 Now, we are ready to start... preparing the files!
