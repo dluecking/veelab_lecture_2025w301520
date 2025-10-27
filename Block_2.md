@@ -5,14 +5,14 @@
 ```bash
 pwd;
 ```
-Output should show `/lisc/home/user/<USER>/2025w301520/fluA`. This is the directory we created at the end of our previous excercise block.
+Output should show `/lisc/data/scratch/course/2025w301520/<USER>/fluA`. This is the directory we created at the end of our previous excercise block.
 
 ## Change to temporary directory
 
 ```bash
 cd tmp;
 ```
-Since most files we will generate are temporary, it makes more sense to work inside this directory and only write final processed files in  `/lisc/home/user/<USER>/2025w301520/fluA/processed_HA_NA`.
+Since most files we will generate are temporary, it makes more sense to work inside this directory and only write final processed files in  `/lisc/data/scratch/course/2025w301520/<USER>/fluA/processed_HA_NA`.
 
 ## Inspect data file
 
