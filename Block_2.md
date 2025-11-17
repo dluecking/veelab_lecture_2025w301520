@@ -262,7 +262,7 @@ sed 's/>\(\S\+\) \S\+ .\+|\(H[0-9]\+N[0-9]\+\)|[^|]\+|[0-9]\+|\(\S\+\)/>\1|\2|\3
 <br/>
 
 ---
-## Tranlsate nucleotide sequences to amino acids for alignment
+## Translate nucleotide sequences to amino acids for alignment
 
 Wait! lets first load **[seqkit](https://bioinf.shenwei.me/seqkit/)**!
 ```bash
