@@ -109,7 +109,7 @@ You can check the number of sequences again to verify.
 Lastly, VirusRecom requires a **reference_gt_name.txt** that contains the exact headers of our reference genotype sequences as a list, this file has been prepared already and is also in `/data. VirusRecom will match against these.
 
 ```bash
-conda activate virusrecom
+conda activate virusrecom_env
 virusrecom -a hdv_all_aligned.fasta -q seq1 -l reference_gt_name.txt -cp 0.9 -g y -m m -w 50 -s 10 -o output_dir
 ```
 
