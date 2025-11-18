@@ -8,7 +8,8 @@ All work we will be doing, will happen on LiSC. Here is a quick starter guide fo
 Read that and continue here.
 
 **SSH Login**
-To login to LiSC, open `tabby` and run the following command:
+
+To login to LiSC, open `tabby` and run the following command, where `<user>` is your personal user login:
 ```bash
 ssh <user>@login01.lisc.univie.ac.at
 ```
@@ -19,7 +20,7 @@ ED25519 key fingerprint is SHA256:TktqgkGsuDaxZ1df2g9w2P12jm3s6d7ayFw0NZ4NzlQ.
 This key is not known by any other names.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? 
 ```
-Then it will ask for your password. Type it in (dont worry that you cant see whats being written, thats normal for passwords in the terminal).
+Then it will ask for your password (the one you set up which is connected to your `<user>`). Type it in and don't worry that you cant see whats being written, thats normal for passwords in the terminal.
 Hit ENTER and here we go! You are now logged in to the LiSC server!
 
 
