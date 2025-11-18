@@ -1,5 +1,27 @@
 # Block 1: Introduction and first steps
 ## Project 1: Phylogenetics of Influenzavirus
+All work we will be doing, will happen on LiSC. Here is a quick starter guide for it, if you havent read it:
+
+
+[LiSC Starter Guide](https://wiki.lisc.univie.ac.at/access/gettingstarted/tutorial)
+
+Read that and continue here.
+
+**SSH Login**
+To login to LiSC, open `tabby` and run the following command:
+```bash
+ssh <user>@login01.lisc.univie.ac.at
+```
+This will (if it is your first login) prompt the following output:
+```bash
+The authenticity of host 'login01.lisc.univie.ac.at (131.130.65.101)' can't be established.
+ED25519 key fingerprint is SHA256:TktqgkGsuDaxZ1df2g9w2P12jm3s6d7ayFw0NZ4NzlQ.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+```
+Then it will ask for your password. Type it in (dont worry that you cant see whats being written, thats normal for passwords in the terminal).
+Hit ENTER and here we go! You are now logged in to the LiSC server!
+
 
 ## Introduction to the Linux commandline
 The Linux command line is a text interface to your computer. Often referred to as the shell, terminal, console, prompt or various other names, it can give the appearance of being complex and confusing to use. But after getting used to the black screen and the keyboard-centric interface, you will quickly understand why its so powerful!
