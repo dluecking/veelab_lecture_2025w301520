@@ -90,15 +90,17 @@ https://iqtree.github.io/doc/Tutorial
 This are the commands we will be running, which take like ~40 min each. So grab a coffee :). 
 
 ```
+module load iqtree
+
 iqtree2 -s NA_genes_newHead_corrFrame_aln_trimmed.ffn \
-  -m GTR+6 \
+  -m GTR+R6 \
   -B 1000 -alrt 1000 \
   -T 4 \
   -pre NA_tree;
 
 # and
 iqtree2 -s HA_genes_newHead_corrFrame_aln_trimmed.ffn \
-  -m GTR+6 \
+  -m GTR+R6 \
   -B 1000 -alrt 1000 \
   -T 4 \
   -pre HA_tree
