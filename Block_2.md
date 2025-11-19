@@ -424,58 +424,6 @@ To view this example click the <Kbd>End</Kbd> key.
 </details>
 </br>
 
----
-## Make metadata files from the headers for use with iTOL
-Change to our `processed_HA_NA` directory.
-```bash
-cd ../processed_HA_NA;
-```
-
-Print column headers and add tab-separated (`\t`) fields from the headers.
-```bash
-# Create ouput files by writing headers
-printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_HA.tab;
-printf "accession\tsubtype\tcountry\thost\tdate\n" > genes_metadata_NA.tab;
-
-# Append to the files the different fields of the standardised headers
-grep ">" HA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_HA.tab;
-grep ">" NA_genes_newHead_corrFrame.faa | sed 's/>//' | sed 's/|/\t/g' >> genes_metadata_NA.tab;
-```
-
-- Command breakdown
-
-```bash
-printf "accession\tsubtype\tcountry\thost\tdate\n"
-```
-> Print headers separated by a tab chatacter (`\t`).
-
-```bash
-sed 's/>//'
-```
-> Substitute `>` by nothing (`//`) (essentially deleting them).
-
-```bash
-sed 's/|/\t/g'
-```
-> Substitute `|` by a tab (`\t`) globally. This will make the fields tab-separated.
-
-```bash
->> genes_metadata_HA.tab;
-```
-> `>>` will write and append, comapred to `>` which would overwrite the files.
-
-<details>
-
-<summary>See output</summary>
-
-```bash
-less genes_metadata_HA.tab;
-```
-
-![](./images/genes_metadata_HA_tab.png)
-
-</details>
-</br>
 
 <p align="right">
     <kbd> <br> <a href="./Block_3.md"><big><b>Next: Block 3</b></big></a> <br> </kbd>
