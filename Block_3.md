@@ -36,13 +36,12 @@ mafft --thread 4 --amino --localpair --maxiterate 1000 ../processed_HA_NA/NA_gen
 
 **Step 2: Back-translation**
 
-We use pal2nal.pl (https://www.bork.embl.de/pal2nal/) to backtranslate. 
+We use pal2nal.pl (https://www.bork.embl.de/pal2nal/) to backtranslate. You need to copy the `pal2nal.pl` script from `/lisc/data/scratch/course/2025w301520/scripts` to your scripts directory 
 
-```
+```bash
+
 perl ../scripts/pal2nal.pl HA_genes_newHead_corrFrame_aln.faa ../tmp/HA_genes_newHead_corrFrame.ffn -output fasta -codontable 1 > HA_genes_newHead_corrFrame_aln.ffn
-
 perl ../scripts/pal2nal.pl NA_genes_newHead_corrFrame_aln.faa ../tmp/NA_genes_newHead_corrFrame.ffn -output fasta -codontable 1 > NA_genes_newHead_corrFrame_aln.ffn
-
 ```
 
 **Step 3: View alignment and trim**
