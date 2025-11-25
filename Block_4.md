@@ -30,7 +30,7 @@ mafft --thread 4 --maxiterate 1000 --auto hdv_clean.fasta > hdv_clean_aligned.fa
   <summary>
     Solution
   </summary>
-Most sequences are around 580-588bp or 642-645 bp long, corresponding to the two isoforms of HDAg, short and long. The alignment shows nicely, that the sequences differ in their last amino acids, whih is a result of the RNA editing.
+Most sequences are around 580-588bp or 642-645 bp long, corresponding to the two isoforms of HDAg, short and long. The alignment shows nicely, that the sequences differ in their last amino acids, which is a result of the RNA editing.
 </details>
 
 
