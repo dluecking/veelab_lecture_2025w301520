@@ -28,6 +28,8 @@ For these steps, we move to `tree/`:
 We will align the sequences with `mafft` (https://mafft.cbrc.jp/alignment/server/index.html). Its a solid and widely used aligner, which can handle our ~800 sequences. Still, this step will take a couple of minutes!
 
 ```bash
+module load MAFFT/7.526-GCC-13.3.0-with-extensions
+
 mafft --thread 4 --amino --localpair --maxiterate 1000 ../processed_HA_NA/HA_genes_newHead_corrFrame.faa > HA_genes_newHead_corrFrame_aln.faa;
 mafft --thread 4 --amino --localpair --maxiterate 1000 ../processed_HA_NA/NA_genes_newHead_corrFrame.faa > NA_genes_newHead_corrFrame_aln.faa;
 ```
@@ -70,7 +72,7 @@ As you've seen, we got some overhangs in our alignment, which creates unnecessar
 For now, lets trim. We are going to use `trimal` for that. 
 
 ```
-module load trimal
+module load trimAl/1.5.0-GCCcore-13.3.0
 
 trimal -in NA_genes_newHead_corrFrame_aln.ffn -out NA_genes_newHead_corrFrame_aln_trimmed.ffn -automated1
 trimal -in HA_genes_newHead_corrFrame_aln.ffn -out HA_genes_newHead_corrFrame_aln_trimmed.ffn -automated1
@@ -90,7 +92,7 @@ https://iqtree.github.io/doc/Tutorial
 This are the commands we will be running, which take like ~40 min each. So grab a coffee :). 
 
 ```
-module load iqtree
+module load IQ-TREE/2.4.0 
 
 iqtree2 -s NA_genes_newHead_corrFrame_aln_trimmed.ffn \
   -m GTR+R6 \
