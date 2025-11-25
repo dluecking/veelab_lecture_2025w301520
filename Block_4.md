@@ -41,8 +41,7 @@ Since the L-HDAg tail evolves separately, we will focus on the core ORF and trim
 Let's translate our sequences, to prevent frameshifts when trimming (normally we would check all 3 frames, but sequences in our dataset are expected in frame 1, so we can stick with it)
 
 ```bash
-module load conda
-conda activate seqkit-2.10.1
+module load SeqKit/2.11.0
 seqkit translate --allow-unknown-codon --frame 1 --transl-table 1 --seq-type dna --threads 2 hdv_clean.fasta > hdv_protein.fasta
 ```
 You should now see the stop codon within the sequence in some sequences, we will now trim those.
