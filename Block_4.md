@@ -67,6 +67,10 @@ To be able to back-translate with pal2nal we will need the nucleotide sequences 
 seqkit seq -n S_HDAg_only.fasta | cut -d'|' -f1 > S_HDAg_core_IDs.txt
 seqkit grep -r -f S_HDAg_core_IDs.txt hdv_clean.fasta -o hdv_nucleotide_S_HDAg.fasta
 ```
+`seq -n` prints only sequence name without `>`
+
+`grep -r -f` looks for regex pattern (-r) provided with the txt file
+
 
 Let's check if they match:
 
@@ -76,7 +80,11 @@ seqkit fx2tab hdv_nucleotide_S_HDAg.fasta | cut -f1 > nucleotide_ids.txt
 diff protein_ids.txt nucleotide_ids.txt
 ```
 
+`fx2tab`converts the fasta file into a tab-delimited table (i.e. field 1 = sequence ID, field 2= sequence)
+
+
 If **diff** outputs nothing → the protein and nucleotide FASTAs have exactly matching IDs, you're ready for pal2nal!
+
 
 Next align your trimmed protein sequences and run pal2nal (attention: headers must match exactly and be in the same order for pal2nal)
 
