@@ -21,7 +21,7 @@ sort -n lengths.txt | uniq -c
 As in the previous exercise, we will align using `mafft`.
 
 ```bash
-module load mafft
+module load MAFFT
 mafft --thread 4 --maxiterate 1000 --auto hdv_clean.fasta > hdv_clean_aligned.fasta
 ```
 **Can you explain what you observe in the alignment?**
